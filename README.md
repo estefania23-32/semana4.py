@@ -65,8 +65,8 @@ inventory = {
 ## 🔍 Error Handling                         |
 **********************************************
 The program includes validation to prevent:
- +Adding duplicate products
- + Entering non-numeric values for prices and quantities
- + Using negative or zero values for prices and quantities
+   + Adding duplicate products
+   + Entering non-numeric values for prices and quantities
+   + Using negative or zero values for prices and quantities
 
 
