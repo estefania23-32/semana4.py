@@ -41,9 +41,9 @@ Instructions for the correct use of the program :
 
 Enter your choice (1-6): 1
  Add product name: Leche
- Enter product price: $2.500
- Enter product quantity: 10
- Product 'Leche' added successfully.
+  Enter product price: $2.500
+  Enter product quantity: 10
+  Product 'Leche' added successfully.
 
 **********************************************
 ### Data Structure 📝                          |
