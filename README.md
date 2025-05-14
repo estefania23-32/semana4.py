@@ -6,10 +6,15 @@
 |These are the funtions of the program|
 **************************************
 1)Add products with name, price, and quantity
+
 2)Search for products by name
+
 3)Update product prices
+
 4)Remove products from inventory
+
 5)Calculate total inventory value
+
 6)Requires minimum 5 products before exiting
 
 ***********************************************
