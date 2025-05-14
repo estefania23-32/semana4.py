@@ -30,6 +30,7 @@ Instructions for the correct use of the program :
 3)Update prices that you nees change
 4)Remove discontinued products
 5)Calculate total inventory value
+6)Exit
 ## 💡 Example Usage
 ===== INVENTORY LA VAQUITA =====
 1. Add product
@@ -59,10 +60,8 @@ Enter your choice (1-6): 1
 | update_price() | Changes the price of an existing product |
 | remove_product() | Deletes a product from inventory |
 | calculate_total_value() | Computes the value of all inventory items |
-| display_inventory() | Shows all products in a formatted table |
 
-
-This program uses Python's match-case statement
+This program uses match-case statement
 The main program loop runs until the user chooses to exit (option 6) 
 and has sufficient inventory items.
 
