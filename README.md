@@ -48,6 +48,20 @@ Enter your choice (1-6): 1
 **********************************************
 ### Data Structure 📝                          |
 **********************************************
+## 🔑 Key Components
+
+### Main Functions
+
+| Function | Description |
+|----------|-------------|
+| add_product() | Adds a new product with name, price, and quantity |
+| search_product() | Finds and displays product details |
+| update_price() | Changes the price of an existing product |
+| remove_product() | Deletes a product from inventory |
+| calculate_total_value() | Computes the value of all inventory items |
+| display_inventory() | Shows all products in a formatted table |
+
+
 This program uses Python's match-case statement
 The main program loop runs until the user chooses to exit (option 6) 
 and has sufficient inventory items.
@@ -68,5 +82,14 @@ The program includes validation to prevent:
    + Adding duplicate products
    + Entering non-numeric values for prices and quantities
    + Using negative or zero values for prices and quantities
+   + 
+## ⚠ Important Requirements
+
+- *Exit Condition*: You must have at least 5 products in the inventory before you can exit the program
+- *Input Validation*: The program checks that:
+  - Product names are unique
+  - Prices are positive numbers
+  - Quantities are positive integers
+
 
 
