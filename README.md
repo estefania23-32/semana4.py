@@ -1,7 +1,7 @@
 #Read.me
 
-*************************************
-##📦Inventory(supermarket la vaquita) 📦 |
+
+##📦INVENTORY( LA VAQUITA) 📦 |
 *************************************
 |These are the funtions of the program|
 **************************************
