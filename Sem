@@ -1,0 +1,89 @@
+# National Library Management System
+
+A simple and functional inventory management system for a national library built in Python with lambda functions.
+
+## Features
+
+### Core Functionality
+- Add new books to the catalog
+- Display complete book catalog
+- Search books by author or title
+- Manage book sales and track inventory
+- Apply and manage discount systems
+- Track best-selling books (top 3)
+
+### Static Book Collection
+The system automatically loads 5 permanent classic books:
+1. Don Quijote de la Mancha by Miguel de Cervantes
+2. Cien años de soledad by Gabriel García Márquez
+3. El Principito by Antoine de Saint-Exupéry
+4. 1984 by George Orwell
+5. Orgullo y prejuicio by Jane Austen
+
+## Technical Implementation
+
+### Lambda Functions Used
+The system implements several lambda functions for efficient data processing:
+
+- `search_by_author`: Filters books by author name using case-insensitive search
+- `search_by_title`: Filters books by title using case-insensitive search
+- `available_books`: Returns only books with stock greater than 0
+- `best_sellers`: Returns the top 3 most sold books sorted by sales count
+- `books_with_discount`: Filters books that have active discounts
+- `books_without_discount`: Filters books available for discount application
+
+### Class Structure
+- `NationalLibrary`: Main class that manages the book collection
+- Book data structure includes: ID, title, author, price, original price, stock, sales count, and discount percentage
+
+## How to Use
+
+### Initial Setup
+1. Run the program
+2. Choose to load example data or add your own books
+3. If adding manually, you'll be prompted to enter 5 additional books after the static collection
+
+### Menu Options
+1. **Add Book**: Add a new book to the catalog
+2. **Show Catalog**: Display all books with their details
+3. **Search by Author**: Find books by a specific author
+4. **Search by Title**: Find books containing specific title text
+5. **Available Books**: Show only books with stock available
+6. **Top 3 Best Sellers**: Display the 3 most sold books
+7. **Sell Book**: Process a book sale and update inventory
+8. **Apply Discount**: Add discount percentage to books
+9. **Books with Discount**: Show all discounted books
+0. **Exit**: Close the application
+
+### Book Management
+- Each book tracks its original price and current price after discounts
+- Sales are automatically tracked and inventory is updated
+- Discounts can be applied as percentages (0-100%)
+- System prevents selling more books than available in stock
+
+### Data Persistence
+- Books are stored in memory during program execution
+- Static books are automatically loaded on system startup
+- Example data includes pre-configured sales and discounts for demonstration
+
+## Example Usage
+
+```python
+# The system automatically creates 5 static books
+# You can then add more books or load example data
+# Use the menu to navigate through different functions
+# Lambda functions handle filtering and searching efficiently
+```
+
+## Error Handling
+- Input validation for numeric values
+- Stock validation during sales
+- Discount percentage validation (0-100%)
+- Book ID validation for operations
+
+## System Requirements
+- Python 3.x
+- No external dependencies required
+- Simple console-based interface
+
+This system demonstrates the effective use of lambda functions for data filtering and processing in a practical inventory management application.
