@@ -1,4 +1,214 @@
-. Registro y consulta de ventas
+# National Library Management System - Simple Version
+
+class NationalLibrary:
+    def __init__(self):
+        self.books = []
+        self.id_counter = 1
+        self.load_static_books()
+    
+    def add_book(self, title, author, price, stock):
+        book = {
+            'id': self.id_counter,
+            'title': title,
+            'author': author,
+            'price': price,
+            'original_price': price,
+            'stock': stock,
+            'sales': 0,
+            'discount': 0
+        }
+        self.books.append(book)
+        self.id_counter += 1
+        print(f"✅ Libro '{title}' agregado exitosamente")
+    
+    def show_books(self):
+        if not self.books:
+            print("📚 No hay libros en la biblioteca")
+            return
+        
+        print("\n📚 CATÁLOGO DE LA BIBLIOTECA NACIONAL")
+        print("-" * 60)
+        for book in self.books:
+            price_display = f"${book['price']:.2f}"
+            if book['discount'] > 0:
+                price_display += f" (desc. {book['discount']}%)"
+            
+            print(f"ID: {book['id']} | {book['title']} - {book['author']}")
+            print(f"    Precio: {price_display} | Stock: {book['stock']} | Ventas: {book['sales']}")
+            print("-" * 60)
+    
+    def sell_book(self, book_id, quantity=1):
+        book = next((b for b in self.books if b['id'] == book_id), None)
+        if not book:
+            print("❌ Libro no encontrado")
+            return
+        
+        if book['stock'] < quantity:
+            print(f"❌ Stock insuficiente. Solo quedan {book['stock']} unidades")
+            return
+        
+        book['stock'] -= quantity
+        book['sales'] += quantity
+        print(f"✅ Venta realizada: {quantity} unidad(es) de '{book['title']}'")
+    
+    def apply_discount(self, book_id, percentage):
+        book = next((b for b in self.books if b['id'] == book_id), None)
+        if not book:
+            print("❌ Libro no encontrado")
+            return
+        
+        if percentage < 0 or percentage > 100:
+            print("❌ El descuento debe estar entre 0% y 100%")
+            return
+        
+        book['discount'] = percentage
+        book['price'] = book['original_price'] * (1 - percentage / 100)
+        print(f"✅ Descuento del {percentage}% aplicado a '{book['title']}'")
+    
+    def load_static_books(self):
+        """Load 5 permanent books that are always available"""
+        static_books = {
+            "clasicos": {
+                "don_quijote": {
+                    "title": "Don Quijote de la Mancha",
+                    "author": "Miguel de Cervantes",
+                    "price": 29.99,
+                    "stock": 10
+                },
+                "cien_anos": {
+                    "title": "Cien años de soledad",
+                    "author": "Gabriel García Márquez",
+                    "price": 24.50,
+                    "stock": 15
+                },
+                "principito": {
+                    "title": "El Principito",
+                    "author": "Antoine de Saint-Exupéry",
+                    "price": 18.75,
+                    "stock": 20
+                },
+                "mil_novecientos": {
+                    "title": "1984",
+                    "author": "George Orwell",
+                    "price": 22.90,
+                    "stock": 12
+                },
+                "orgullo": {
+                    "title": "Orgullo y prejuicio",
+                    "author": "Jane Austen",
+                    "price": 21.30,
+                    "stock": 8
+                }
+            }
+        }
+        
+        # Agregar cada libro del diccionario
+        for book_key, book_data in static_books["clasicos"].items():
+            self.add_book(
+                book_data["title"],
+                book_data["author"],
+                book_data["price"],
+                book_data["stock"]
+            )
+
+# Create library instance
+library = NationalLibrary()
+
+# Lambda functions for specific operations
+search_by_author = lambda author: [b for b in library.books if author.lower() in b['author'].lower()]
+search_by_title = lambda title: [b for b in library.books if title.lower() in b['title'].lower()]
+available_books = lambda: [b for b in library.books if b['stock'] > 0]
+best_sellers = lambda: sorted(library.books, key=lambda x: x['sales'], reverse=True)[:3]
+books_with_discount = lambda: [b for b in library.books if b['discount'] > 0]
+books_without_discount = lambda: [b for b in library.books if b['discount'] == 0]
+
+def show_results(books, title="Resultados"):
+    print(f"\n🔍 {title}")
+    print("-" * 50)
+    if not books:
+        print("No se encontraron libros")
+        return
+    
+    for book in books:
+        price_display = f"${book['price']:.2f}"
+        if book['discount'] > 0:
+            price_display += f" (desc. {book['discount']}%)"
+        
+        print(f"{book['title']} - {book['author']}")
+        print(f"Precio: {price_display} | Stock: {book['stock']} | Ventas: {book['sales']}")
+        print("-" * 50)
+
+def add_initial_books():
+    print("🏛️  Biblioteca Nacional - Sistema de Gestión")
+    print("📚 Los 5 libros clásicos ya están cargados")
+    print("📚 Agregar 5 libros adicionales")
+    print("=" * 50)
+    
+    for i in range(1, 6):
+        print(f"\n📖 Libro adicional {i}/5:")
+        try:
+            title = input("  Título: ")
+            author = input("  Autor: ")
+            price = float(input("  Precio: $"))
+            stock = int(input("  Stock: "))
+            library.add_book(title, author, price, stock)
+        except ValueError:
+            print("  ❌ Error en los datos. Intenta de nuevo.")
+            i -= 1
+    
+    print("\n🎉 ¡Catálogo inicial completado!\n")
+
+def main_menu():
+    while True:
+        print("\n🏛️  BIBLIOTECA NACIONAL")
+        print("=" * 40)
+        print("1. Agregar libro")
+        print("2. Mostrar catálogo")
+        print("3. Buscar por autor")
+        print("4. Buscar por título")
+        print("5. Libros disponibles")
+        print("6. 🏆 Los 3 más vendidos")
+        print("7. Vender libro")
+        print("8. Aplicar descuento")
+        print("9. Libros con descuento")
+        print("0. Salir")
+        print("=" * 40)
+        
+        try:
+            option = int(input("Selecciona una opción: "))
+            
+            if option == 1:
+                title = input("Título: ")
+                author = input("Autor: ")
+                price = float(input("Precio: $"))
+                stock = int(input("Stock: "))
+                library.add_book(title, author, price, stock)
+            
+            elif option == 2:
+                library.show_books()
+            
+            elif option == 3:
+                author = input("Autor: ")
+                results = search_by_author(author)
+                show_results(results, f"Libros de {author}")
+            
+            elif option == 4:
+                title = input("Título: ")
+                results = search_by_title(title)
+                show_results(results, f"Libros con '{title}'")
+            
+            elif option == 5:
+                available = available_books()
+                show_results(available, "Libros Disponibles")
+            
+            elif option == 6:
+                top_sellers = best_sellers()
+                show_results(top_sellers, "🏆 Los 3 Libros Más Vendidos")
+            
+            elif option == 7:
+                library.show_books()
+                book_id = int(input("ID del libro: "))
+                quantity = int(input("Cantidad (default 1): ") or "1"). Registro y consulta de ventas
 • Permitir registrar ventas de productos, asociando: cliente, producto vendido,
 cantidad, fecha y descuento (si aplica).
 • Validar stock disponible y actualizarlo automáticamente.# National Library Management System - Simple Version
