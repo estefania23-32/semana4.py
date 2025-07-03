@@ -1,4 +1,7 @@
-# National Library Management System - Simple Version
+. Registro y consulta de ventas
+• Permitir registrar ventas de productos, asociando: cliente, producto vendido,
+cantidad, fecha y descuento (si aplica).
+• Validar stock disponible y actualizarlo automáticamente.# National Library Management System - Simple Version
 
 class NationalLibrary:
     def __init__(self):
